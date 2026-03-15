@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio | Designs & SNS Content</title>
+    <meta name="description" content="Portfolio showcasing menu designs and SNS promotional images.">
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <h1>My Works</h1>
+        <p>Menu Designs & SNS Creatives</p>
+    </header>
+
+    <!-- Profile Section -->
+    <section class="profile">
+        <img src="https://ui-avatars.com/api/?name=Designer&background=e1306c&color=fff&size=150" alt="Profile Image" class="profile-img">
+        <p class="profile-desc">
+            こんにちは！飲食店さま向けのメニュー表や、Instagram等で使える告知画像・バナーを制作しています。<br>
+            「目に留まる」「伝わる」デザインを心がけています。お気軽にご相談ください！
+        </p>
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="btn-instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+            Instagramを見る・DMで依頼
+        </a>
+    </section>
+
+    <!-- Filter Buttons -->
+    <div class="filters">
+        <button class="filter-btn active" data-filter="all">すべて (All)</button>
+        <button class="filter-btn" data-filter="menu">メニュー表 (Menu)</button>
+        <button class="filter-btn" data-filter="sns">SNS告知画像 (SNS)</button>
+        <button class="filter-btn" data-filter="other">その他 (Other)</button>
+    </div>
+
+    <!-- Gallery (Masonry Grid) -->
+    <main class="gallery" id="gallery">
+        <!-- Item 1: Menu (Vertical) -->
+        <article class="gallery-item" data-category="menu">
+            <img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?auto=format&fit=crop&q=80&w=600&h=800" alt="Cafe Menu Design">
+            <div class="gallery-item-overlay">
+                <h3 class="gallery-item-title">カフェ メニュー表</h3>
+            </div>
+        </article>
+
+        <!-- Item 2: SNS (Square) -->
+        <article class="gallery-item" data-category="sns">
+            <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=600&h=600" alt="Instagram Post Template">
+            <div class="gallery-item-overlay">
+                <h3 class="gallery-item-title">新商品告知 Instagram投稿</h3>
+            </div>
+        </article>
+
+        <!-- Item 3: Menu (Vertical) -->
+        <article class="gallery-item" data-category="menu">
+            <img src="https://images.unsplash.com/photo-1621255562768-468b3dc8ce3a?auto=format&fit=crop&q=80&w=600&h=900" alt="Restaurant Menu Design">
+            <div class="gallery-item-overlay">
+                <h3 class="gallery-item-title">イタリアンレストラン メニュー</h3>
+            </div>
+        </article>
+
+        <!-- Item 4: SNS (Story Size 9:16) -->
+        <article class="gallery-item" data-category="sns">
+            <img src="https://images.unsplash.com/photo-1616469829581-73993eb86b02?auto=format&fit=crop&q=80&w=600&h=1067" alt="Instagram Story Ad">
+            <div class="gallery-item-overlay">
+                <h3 class="gallery-item-title">イベント告知 ストーリーズ</h3>
+            </div>
+        </article>
+
+        <!-- Item 5: Other (Horizontal) -->
+        <article class="gallery-item" data-category="other">
+            <img src="https://images.unsplash.com/photo-1542744094-24638ea0b3b5?auto=format&fit=crop&q=80&w=800&h=500" alt="Business Card Design">
+            <div class="gallery-item-overlay">
+                <h3 class="gallery-item-title">ショップカード・名刺</h3>
+            </div>
+        </article>
+
+        <!-- Item 6: SNS (Square) -->
+        <article class="gallery-item" data-category="sns">
+            <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=600&h=600" alt="Campaign Banner">
+            <div class="gallery-item-overlay">
+                <h3 class="gallery-item-title">キャンペーンバナー</h3>
+            </div>
+        </article>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
+            <img src="" alt="" class="lightbox-img" id="lightbox-img">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
