@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -21,7 +21,7 @@
 
     <!-- Profile Section -->
     <section class="profile">
-        <img src="https://ui-avatars.com/api/?name=Designer&background=e1306c&color=fff&size=150" alt="Profile Image" class="profile-img">
+        <img src="https://ui-avatars.com/api/?name=Designer&background=c084fc&color=fff&size=150" alt="Profile Image" class="profile-img">
         <p class="profile-desc">
             こんにちは！飲食店さま向けのメニュー表や、Instagram等で使える告知画像・バナーを制作しています。<br>
             「目に留まる」「伝わる」デザインを心がけています。お気軽にご相談ください！
@@ -44,74 +44,52 @@
         <button class="filter-btn" data-filter="other">その他</button>
     </div>
 
-    <!-- Gallery (Masonry Grid) -->
+    <!-- Gallery (Album Cards) -->
     <main class="gallery" id="gallery">
-        <!-- スタッフ紹介 - 一番前 -->
-        <article class="gallery-item" data-category="other">
-            <img src="7.png" alt="スタッフ紹介">
+
+        <!-- 旅BAR夢port メニューアルバム (cover: 7.png, slides: 7, 1, 3, 4, 5) -->
+        <article class="gallery-item" data-category="menu"
+            data-album="true"
+            data-slides='["7.png","1.png","3.png","4.png","5.png"]'
+            data-labels='["スタッフ紹介","料金システム","Drink Menu","Liqueur / Milk","ALCOHOL FREE / FOOD"]'>
+            <img src="7.png" alt="旅BAR夢port メニュー">
             <div class="gallery-item-overlay">
-                <h3 class="gallery-item-title">スタッフ紹介</h3>
+                <h3 class="gallery-item-title">旅BAR夢port メニュー</h3>
             </div>
+            <span class="album-badge">5枚</span>
         </article>
 
-        <!-- メニュー表 -->
-        <article class="gallery-item" data-category="menu">
-            <img src="1.png" alt="料金システム">
-            <div class="gallery-item-overlay">
-                <h3 class="gallery-item-title">料金システム</h3>
-            </div>
-        </article>
-
-        <article class="gallery-item" data-category="menu">
-            <img src="3.png" alt="Drink Menu">
-            <div class="gallery-item-overlay">
-                <h3 class="gallery-item-title">Drink Menu</h3>
-            </div>
-        </article>
-
-        <article class="gallery-item" data-category="menu">
-            <img src="4.png" alt="Liqueur / Milk メニュー">
-            <div class="gallery-item-overlay">
-                <h3 class="gallery-item-title">Liqueur / Milk メニュー</h3>
-            </div>
-        </article>
-
-        <article class="gallery-item" data-category="menu">
-            <img src="5.png" alt="ALCOHOL FREE / FOOD メニュー">
-            <div class="gallery-item-overlay">
-                <h3 class="gallery-item-title">ALCOHOL FREE / FOOD</h3>
-            </div>
-        </article>
-
-        <!-- スペシャルメニュー -->
+        <!-- 8周年スペシャルメニュー (single) -->
         <article class="gallery-item" data-category="special">
-            <img src="8周年メニュー.JPG" alt="8周年スペシャルメニュー">
+            <img src="8周年メニュー.JPG" alt="8周年 Special Menu">
             <div class="gallery-item-overlay">
                 <h3 class="gallery-item-title">8周年 Special Menu</h3>
             </div>
         </article>
 
-        <!-- その他 -->
-        <article class="gallery-item" data-category="other">
-            <img src="2.png" alt="禁止事項">
+        <!-- その他アルバム (cover: 2.png, slides: 2, 6) -->
+        <article class="gallery-item" data-category="other"
+            data-album="true"
+            data-slides='["2.png","6.png"]'
+            data-labels='["禁止事項","ボードゲーム一覧"]'>
+            <img src="2.png" alt="その他">
             <div class="gallery-item-overlay">
-                <h3 class="gallery-item-title">禁止事項</h3>
+                <h3 class="gallery-item-title">その他</h3>
             </div>
+            <span class="album-badge">2枚</span>
         </article>
 
-        <article class="gallery-item" data-category="other">
-            <img src="6.png" alt="ボードゲームいちらんひょう">
-            <div class="gallery-item-overlay">
-                <h3 class="gallery-item-title">ボードゲーム一覧</h3>
-            </div>
-        </article>
     </main>
 
-    <!-- Lightbox Modal -->
+    <!-- Slideshow Lightbox Modal -->
     <div class="lightbox" id="lightbox">
         <div class="lightbox-content">
             <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
+            <button class="lightbox-prev" id="lightbox-prev" aria-label="Previous">&#8249;</button>
             <img src="" alt="" class="lightbox-img" id="lightbox-img">
+            <button class="lightbox-next" id="lightbox-next" aria-label="Next">&#8250;</button>
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+            <p class="lightbox-counter" id="lightbox-counter"></p>
         </div>
     </div>
 

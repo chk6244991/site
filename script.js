@@ -1,80 +1,111 @@
 document.addEventListener('DOMContentLoaded', () => {
+
     /* --- 1. Category Filtering --- */
     const filterBtns = document.querySelectorAll('.filter-btn');
     const galleryItems = document.querySelectorAll('.gallery-item');
 
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Remove active class from all
             filterBtns.forEach(b => b.classList.remove('active'));
-            // Add active class to clicked button
             btn.classList.add('active');
-
             const filterValue = btn.getAttribute('data-filter');
 
             galleryItems.forEach(item => {
-                // If filter is "all" or matches the item's category, show it
                 if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
                     item.style.display = 'block';
-                    // Optional: Add a small animation/delay here if using Flex/Grid instead of columns
                     setTimeout(() => {
                         item.style.opacity = '1';
                         item.style.transform = 'scale(1)';
                     }, 50);
                 } else {
                     item.style.opacity = '0';
-                    item.style.transform = 'scale(0.8)';
-                    setTimeout(() => {
-                        item.style.display = 'none';
-                    }, 300); // Matches CSS transition time
+                    item.style.transform = 'scale(0.9)';
+                    setTimeout(() => { item.style.display = 'none'; }, 300);
                 }
             });
         });
     });
 
-    /* --- 2. Lightbox (Image Enlargement) Image Loading --- */
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const lightboxClose = document.getElementById('lightbox-close');
+    /* --- 2. Slideshow Lightbox --- */
+    const lightbox       = document.getElementById('lightbox');
+    const lightboxImg    = document.getElementById('lightbox-img');
+    const lightboxClose  = document.getElementById('lightbox-close');
+    const lightboxPrev   = document.getElementById('lightbox-prev');
+    const lightboxNext   = document.getElementById('lightbox-next');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxCounter = document.getElementById('lightbox-counter');
 
-    // Open lightbox
+    let currentSlides  = [];
+    let currentLabels  = [];
+    let currentIndex   = 0;
+
+    function showSlide(index) {
+        lightboxImg.style.opacity = '0';
+        setTimeout(() => {
+            lightboxImg.src = currentSlides[index];
+            lightboxImg.alt = currentLabels[index] || '';
+            lightboxCaption.textContent = currentLabels[index] || '';
+            lightboxCounter.textContent = (index + 1) + ' / ' + currentSlides.length;
+            lightboxImg.style.opacity = '1';
+
+            // Show/hide prev-next buttons
+            lightboxPrev.style.display = currentSlides.length > 1 ? 'flex' : 'none';
+            lightboxNext.style.display = currentSlides.length > 1 ? 'flex' : 'none';
+        }, 120);
+    }
+
+    // Open lightbox on item click
     galleryItems.forEach(item => {
         item.addEventListener('click', () => {
-            const imgEl = item.querySelector('img');
-            const imgSrc = imgEl.src;
-            const imgAlt = imgEl.alt;
+            const isAlbum = item.getAttribute('data-album') === 'true';
 
-            lightboxImg.src = imgSrc;
-            lightboxImg.alt = imgAlt;
-            
+            if (isAlbum) {
+                currentSlides = JSON.parse(item.getAttribute('data-slides'));
+                currentLabels = JSON.parse(item.getAttribute('data-labels'));
+            } else {
+                const imgEl = item.querySelector('img');
+                currentSlides = [imgEl.src];
+                currentLabels = [imgEl.alt];
+            }
+
+            currentIndex = 0;
             lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            document.body.style.overflow = 'hidden';
+            showSlide(currentIndex);
         });
+    });
+
+    // Next slide
+    lightboxNext.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex + 1) % currentSlides.length;
+        showSlide(currentIndex);
+    });
+
+    // Prev slide
+    lightboxPrev.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex - 1 + currentSlides.length) % currentSlides.length;
+        showSlide(currentIndex);
     });
 
     // Close lightbox
     const closeLightbox = () => {
         lightbox.classList.remove('active');
-        document.body.style.overflow = 'auto'; // Restore scrolling
-        // Clear src after transition to prevent flicker on next open
-        setTimeout(() => {
-            lightboxImg.src = '';
-        }, 400); 
+        document.body.style.overflow = 'auto';
+        setTimeout(() => { lightboxImg.src = ''; }, 400);
     };
 
     lightboxClose.addEventListener('click', closeLightbox);
 
-    // Close when clicking outside image
     lightbox.addEventListener('click', (e) => {
-        if (e.target !== lightboxImg) {
-            closeLightbox();
-        }
+        if (e.target === lightbox) closeLightbox();
     });
 
-    // Close on Escape key press
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-            closeLightbox();
-        }
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % currentSlides.length; showSlide(currentIndex); }
+        if (e.key === 'ArrowLeft')  { currentIndex = (currentIndex - 1 + currentSlides.length) % currentSlides.length; showSlide(currentIndex); }
     });
 });
